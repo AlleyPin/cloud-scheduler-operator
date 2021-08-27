@@ -1,0 +1,235 @@
+
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.4.1
+  creationTimestamp: null
+  name: schedulers.gcp-contrib.alleypinapis.com
+spec:
+  group: gcp-contrib.alleypinapis.com
+  names:
+    kind: Scheduler
+    listKind: SchedulerList
+    plural: schedulers
+    singular: scheduler
+  scope: Namespaced
+  versions:
+  - name: v1beta1
+    schema:
+      openAPIV3Schema:
+        description: Scheduler is the Schema for the schedulers API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: SchedulerSpec defines the desired state of Scheduler
+            properties:
+              appEngineHttpTarget:
+                properties:
+                  body:
+                    type: string
+                  headers:
+                    additionalProperties:
+                      type: string
+                    type: object
+                  host:
+                    type: string
+                  instance:
+                    type: string
+                  method:
+                    type: string
+                  relativeUri:
+                    type: string
+                  service:
+                    type: string
+                  version:
+                    type: string
+                required:
+                - body
+                - headers
+                - host
+                - instance
+                - method
+                - relativeUri
+                - service
+                - version
+                type: object
+              appEngineLocationID:
+                type: string
+              description:
+                type: string
+              httpTarget:
+                properties:
+                  body:
+                    type: string
+                  headers:
+                    additionalProperties:
+                      type: string
+                    type: object
+                  method:
+                    type: string
+                  uri:
+                    type: string
+                required:
+                - body
+                - headers
+                - method
+                - uri
+                type: object
+              locationID:
+                type: string
+              name:
+                type: string
+              projectID:
+                type: string
+              pubsubTarget:
+                properties:
+                  attributes:
+                    additionalProperties:
+                      type: string
+                    type: object
+                  data:
+                    type: string
+                  topicName:
+                    type: string
+                required:
+                - attributes
+                - data
+                - topicName
+                type: object
+              retryConfig:
+                properties:
+                  maxBackoffDuration:
+                    description: Maximum time to wait before retrying a job after
+                      it fails
+                    type: string
+                  maxDoublings:
+                    description: The time between retries will double max doublings
+                      times
+                    type: integer
+                  maxRetryAttempts:
+                    description: Maximum number of retry attempts for a failed job
+                    type: integer
+                  maxRetryDuration:
+                    description: Time limit for retrying a failed job, 0s means unlimited
+                    type: string
+                  minBackoffDuration:
+                    description: Minimum time to wait before retrying a job after
+                      it fails
+                    type: string
+                required:
+                - maxBackoffDuration
+                - maxDoublings
+                - maxRetryAttempts
+                - maxRetryDuration
+                - minBackoffDuration
+                type: object
+              schedule:
+                type: string
+              secretRef:
+                description: The secretRef is a reference that provides the service
+                  account json to access google cloud api
+                properties:
+                  key:
+                    type: string
+                  name:
+                    type: string
+                  namespace:
+                    type: string
+                required:
+                - name
+                type: object
+              targetType:
+                enum:
+                - Pubsub
+                - AppEngineHttp
+                - Http
+                type: string
+              timeZone:
+                type: string
+            required:
+            - appEngineLocationID
+            - locationID
+            - name
+            - projectID
+            - schedule
+            - secretRef
+            - targetType
+            - timeZone
+            type: object
+          status:
+            description: SchedulerStatus defines the observed state of Scheduler
+            properties:
+              description:
+                type: string
+              name:
+                type: string
+              retryConfig:
+                properties:
+                  maxBackoffDuration:
+                    description: Maximum time to wait before retrying a job after
+                      it fails
+                    type: string
+                  maxDoublings:
+                    description: The time between retries will double max doublings
+                      times
+                    type: integer
+                  maxRetryAttempts:
+                    description: Maximum number of retry attempts for a failed job
+                    type: integer
+                  maxRetryDuration:
+                    description: Time limit for retrying a failed job, 0s means unlimited
+                    type: string
+                  minBackoffDuration:
+                    description: Minimum time to wait before retrying a job after
+                      it fails
+                    type: string
+                required:
+                - maxBackoffDuration
+                - maxDoublings
+                - maxRetryAttempts
+                - maxRetryDuration
+                - minBackoffDuration
+                type: object
+              schedule:
+                type: string
+              state:
+                description: Output only. State of the job.
+                type: string
+              timeZone:
+                type: string
+              userUpdateTime:
+                description: Output only. The creation time of the job.
+                format: date-time
+                type: string
+            required:
+            - description
+            - name
+            - schedule
+            - state
+            - timeZone
+            - userUpdateTime
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []
