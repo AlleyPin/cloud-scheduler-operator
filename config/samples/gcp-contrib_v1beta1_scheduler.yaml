@@ -1,0 +1,28 @@
+apiVersion: gcp-contrib.alleypinapis.com/v1beta1
+kind: Scheduler
+metadata:
+  name: scheduler-sample
+spec:
+  name: "wys1203-test"
+  projectID: "alleypin-179404"
+  locationID: "asia-east1"
+  description: "測試a"
+  appEngineLocationID: "asia-northeast1"
+  timeZone: "Asia/Taipei"
+  schedule: "* */2 * * *"
+  secretRef:
+    name: mysecret
+    namespace: default
+    key: sa-key.json
+  targetType: Pubsub
+  pubsubTarget:
+    topicName: "projects/alleypin-179404/topics/a-numbers"
+    data: '{"number":2}'
+    attributes:
+      eventType: "square"
+  retryConfig:
+    maxRetryAttempts: 4
+    maxRetryDuration: "3s"
+    minBackoffDuration: "5s"
+    maxBackoffDuration: "3600s"
+    maxDoublings: 5

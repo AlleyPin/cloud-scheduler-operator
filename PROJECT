@@ -1,0 +1,16 @@
+domain: alleypinapis.com
+layout:
+- go.kubebuilder.io/v3
+projectName: cloud-scheduler-operator
+repo: github.com/AlleyPin/cloud-scheduler-operator
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: alleypinapis.com
+  group: gcp-contrib
+  kind: Scheduler
+  path: github.com/AlleyPin/cloud-scheduler-operator/api/v1beta1
+  version: v1beta1
+version: "3"
