@@ -6,13 +6,13 @@ spec:
   name: "wys1203-test"
   projectID: "alleypin-179404"
   locationID: "asia-east1"
-  description: "測試a"
+  description: "test description changes"
   appEngineLocationID: "asia-northeast1"
   timeZone: "Asia/Taipei"
   schedule: "* */2 * * *"
   secretRef:
-    name: mysecret
-    namespace: default
+    name: cloud-scheduler-admin-service-account
+    namespace: cloud-scheduler-operator-system
     key: sa-key.json
   targetType: Pubsub
   pubsubTarget:

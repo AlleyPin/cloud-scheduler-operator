@@ -51,6 +51,7 @@ type SchedulerReconciler struct {
 	CloudScheduler *scheduler.CloudSchedulerClient
 }
 
+//+kubebuilder:rbac:groups=core,resources=secrets,verbs=get;list;watch
 //+kubebuilder:rbac:groups=gcp-contrib.alleypinapis.com,resources=schedulers,verbs=get;list;watch;create;update;patch;delete
 //+kubebuilder:rbac:groups=gcp-contrib.alleypinapis.com,resources=schedulers/status,verbs=get;update;patch
 //+kubebuilder:rbac:groups=gcp-contrib.alleypinapis.com,resources=schedulers/finalizers,verbs=update
